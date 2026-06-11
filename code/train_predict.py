@@ -166,3 +166,11 @@ def main():
 
     feature_cols = BASE_FEATURES + ["geo_mean"]
 
+    for fold, (tr_idx, va_idx) in enumerate(folds.split(train)):
+        # Out-of-fold location mean encoding (no leakage)
+        geo_mean_tr = smoothed_location_mean(
+            train_geo.iloc[tr_idx], y[tr_idx], train_geo.iloc[tr_idx],
+            global_mean, TARGET_MEAN_SMOOTH)
+        geo_mean_va = smoothed_location_mean(
+            train_geo.iloc[tr_idx], y[tr_idx], train_geo.iloc[va_idx],
+            global_mean, TARGET_MEAN_SMOOTH)
