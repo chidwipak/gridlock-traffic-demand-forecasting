@@ -118,3 +118,11 @@ def smoothed_location_mean(train_keys, train_target, lookup_keys, global_mean, s
     agg = pd.DataFrame({"k": train_keys, "y": train_target}).groupby("k")["y"].agg(["sum", "count"])
     enc = (agg["sum"] + global_mean * smooth) / (agg["count"] + smooth)
     return lookup_keys.map(enc).fillna(global_mean).to_numpy()
+
+
+# ----------------------------------------------------------------------------
+# Model
+# ----------------------------------------------------------------------------
+def lgb_params(seed):
+    return dict(
+        objective="regression",
