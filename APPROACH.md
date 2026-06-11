@@ -43,3 +43,18 @@ this kind of traffic problem are usually simple and physical:
    much weaker effect than location or road type.
 
 6. **Weather and landmarks barely move demand** in this data, so we let the model
+   use them but did not expect much from them. Temperature is sometimes missing,
+   so we flag the missing ones instead of guessing.
+
+## The features we built
+
+- **Location memory (the key feature):** for every geohash we compute its average
+  demand from the training rows. To avoid cheating, we do this *inside* the
+  cross‑validation — each fold only uses the other folds to build the average, and
+  we smooth it so that places with very few observations fall back toward the
+  global average.
+- **Map coordinates:** we decode each geohash into an approximate latitude and
+  longitude so the model can also learn smooth spatial patterns (nearby places
+  behaving alike).
+- **Time of day:** minutes since midnight, plus sine/cosine versions so the model
+  understands that 23:45 and 00:00 are next to each other, plus the hour.
