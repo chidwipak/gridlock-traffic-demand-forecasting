@@ -126,3 +126,11 @@ def smoothed_location_mean(train_keys, train_target, lookup_keys, global_mean, s
 def lgb_params(seed):
     return dict(
         objective="regression",
+        metric="rmse",
+        learning_rate=0.05,
+        num_leaves=63,
+        min_child_samples=40,
+        subsample=0.8,
+        subsample_freq=1,
+        colsample_bytree=0.8,
+        reg_lambda=1.0,
