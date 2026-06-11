@@ -62,3 +62,11 @@ def decode_geohash(gh: str):
                 if idx & mask:
                     lat_lo = mid
                 else:
+                    lat_hi = mid
+            is_lon = not is_lon
+    return (lat_lo + lat_hi) / 2, (lon_lo + lon_hi) / 2
+
+
+# ----------------------------------------------------------------------------
+# Feature engineering
+# ----------------------------------------------------------------------------
