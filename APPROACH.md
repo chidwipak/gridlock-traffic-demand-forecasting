@@ -88,3 +88,15 @@ it did not train on.
 - Python 3
 - pandas and numpy for data handling
 - scikit‑learn for cross‑validation
+- LightGBM for the model
+
+## How to reproduce
+
+```
+cd code
+python train_predict.py
+```
+
+This reads `code/data/train.csv` and `code/data/test.csv`, trains the models, and
+writes `code/submission.csv` together with `code/cv_report.txt`. Because all seeds
+are fixed, the output file is identical on every run.
