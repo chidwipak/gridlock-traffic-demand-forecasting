@@ -142,3 +142,11 @@ def lgb_params(seed):
         deterministic=True,
         force_row_wise=True,
         verbose=-1,
+    )
+
+
+def main():
+    train = pd.read_csv(os.path.join(DATA_DIR, "train.csv"))
+    test = pd.read_csv(os.path.join(DATA_DIR, "test.csv"))
+
+    train = add_base_features(train)
