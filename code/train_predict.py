@@ -14,3 +14,11 @@ The pipeline is fully deterministic: all random seeds are fixed, so every
 run produces a byte-identical submission.csv.
 """
 from __future__ import annotations
+
+import hashlib
+import os
+import numpy as np
+import pandas as pd
+import lightgbm as lgb
+from sklearn.model_selection import KFold
+
