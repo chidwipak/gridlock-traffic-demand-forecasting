@@ -110,3 +110,11 @@ BASE_FEATURES = [
     "RoadType_code", "LargeVehicles_code", "Landmarks_code", "Weather_code",
     "lanes", "temp", "temp_missing",
 ]
+CATEGORICAL = ["RoadType_code", "LargeVehicles_code", "Landmarks_code", "Weather_code"]
+
+
+def smoothed_location_mean(train_keys, train_target, lookup_keys, global_mean, smooth):
+    """Smoothed target mean per location key, computed only on the given train rows."""
+    agg = pd.DataFrame({"k": train_keys, "y": train_target}).groupby("k")["y"].agg(["sum", "count"])
+    enc = (agg["sum"] + global_mean * smooth) / (agg["count"] + smooth)
+    return lookup_keys.map(enc).fillna(global_mean).to_numpy()
