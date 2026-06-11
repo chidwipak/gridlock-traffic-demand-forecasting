@@ -102,3 +102,11 @@ def add_base_features(df: pd.DataFrame) -> pd.DataFrame:
     df["temp"] = df["Temperature"].astype(float)
     df["temp_missing"] = df["Temperature"].isna().astype(int)
     return df
+
+
+BASE_FEATURES = [
+    "tmin", "t_sin", "t_cos", "hour",
+    "lat", "lon",
+    "RoadType_code", "LargeVehicles_code", "Landmarks_code", "Weather_code",
+    "lanes", "temp", "temp_missing",
+]
