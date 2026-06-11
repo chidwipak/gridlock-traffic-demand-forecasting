@@ -158,3 +158,11 @@ def main():
     # Location key = geohash (the dominant signal, corr ~0.83 with demand)
     train_geo = train["geohash"]
     test_geo = test["geohash"]
+
+    folds = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+
+    oof = np.zeros(len(train))
+    test_pred = np.zeros(len(test))
+
+    feature_cols = BASE_FEATURES + ["geo_mean"]
+
