@@ -28,3 +28,18 @@ this kind of traffic problem are usually simple and physical:
    genuinely useful.
 
 2. **Road type matters a lot.** Highways average about 0.61 demand, streets about
+   0.27, and residential roads only about 0.06. That is a huge gap and an obvious
+   signal.
+
+3. **Wide roads carry more.** Roads with 4 or 5 lanes average around 0.60, while
+   1–3 lane roads sit near 0.08. Lane count is basically a proxy for how major the
+   road is.
+
+4. **Large vehicles allowed** roads are busier (0.13 vs 0.07) — again a marker of
+   bigger, more important roads.
+
+5. **Time of day has a gentle daily rhythm.** Demand rises through the morning,
+   peaks around the middle of the day, and falls in the evening. It is a real but
+   much weaker effect than location or road type.
+
+6. **Weather and landmarks barely move demand** in this data, so we let the model
