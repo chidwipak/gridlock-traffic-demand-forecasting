@@ -94,3 +94,11 @@ def add_base_features(df: pd.DataFrame) -> pd.DataFrame:
         ("RoadType", {"Residential": 0, "Street": 1, "Highway": 2}),
         ("LargeVehicles", {"Not Allowed": 0, "Allowed": 1}),
         ("Landmarks", {"No": 0, "Yes": 1}),
+        ("Weather", {"Sunny": 0, "Rainy": 1, "Foggy": 2, "Snowy": 3}),
+    ]:
+        df[col + "_code"] = df[col].map(mapping).fillna(-1).astype(int)
+
+    df["lanes"] = df["NumberofLanes"].astype(int)
+    df["temp"] = df["Temperature"].astype(float)
+    df["temp_missing"] = df["Temperature"].isna().astype(int)
+    return df
