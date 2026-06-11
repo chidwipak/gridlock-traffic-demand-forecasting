@@ -78,3 +78,11 @@ def parse_minutes(ts: str) -> int:
 def add_base_features(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     # Time of day in minutes and cyclical encodings (traffic is periodic)
+    df["tmin"] = df["timestamp"].map(parse_minutes)
+    ang = 2 * np.pi * df["tmin"] / 1440.0
+    df["t_sin"] = np.sin(ang)
+    df["t_cos"] = np.cos(ang)
+    df["hour"] = (df["tmin"] // 60).astype(int)
+
+    # Spatial coordinates from geohash
+    coords = df["geohash"].map(decode_geohash)
