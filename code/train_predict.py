@@ -54,3 +54,11 @@ def decode_geohash(gh: str):
             if is_lon:
                 mid = (lon_lo + lon_hi) / 2
                 if idx & mask:
+                    lon_lo = mid
+                else:
+                    lon_hi = mid
+            else:
+                mid = (lat_lo + lat_hi) / 2
+                if idx & mask:
+                    lat_lo = mid
+                else:
