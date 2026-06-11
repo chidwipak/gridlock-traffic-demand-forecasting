@@ -58,3 +58,18 @@ this kind of traffic problem are usually simple and physical:
   behaving alike).
 - **Time of day:** minutes since midnight, plus sine/cosine versions so the model
   understands that 23:45 and 00:00 are next to each other, plus the hour.
+- **Road details:** road type, number of lanes, large‑vehicles‑allowed, landmark,
+  weather, temperature, and a "temperature is missing" flag.
+
+## The model
+
+We use **LightGBM**, a gradient‑boosted decision tree model. Trees handle this
+mix of categories and numbers well, capture interactions like
+"highway *and* midday" automatically, and are robust to the missing values here.
+
+To make the result stable and reproducible:
+
+- We train with **5‑fold cross‑validation** and average the test predictions
+  across all folds.
+- Inside each fold we train with **4 different random seeds and average them**, so
+  the prediction does not depend on luck from any single run.
