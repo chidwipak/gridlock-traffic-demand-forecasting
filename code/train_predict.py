@@ -22,3 +22,11 @@ import pandas as pd
 import lightgbm as lgb
 from sklearn.model_selection import KFold
 
+# ----------------------------------------------------------------------------
+# Configuration
+# ----------------------------------------------------------------------------
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(HERE, "data")
+SEED = 42
+N_FOLDS = 5
+N_SEEDS = 2               # average several LightGBM seeds for a stable result
