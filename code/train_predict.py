@@ -46,3 +46,11 @@ def decode_geohash(gh: str):
     """Decode a geohash string into (lat, lon) center coordinates."""
     lat_lo, lat_hi = -90.0, 90.0
     lon_lo, lon_hi = -180.0, 180.0
+    is_lon = True
+    for ch in gh:
+        idx = _DECODE.get(ch, 0)
+        for bit in range(4, -1, -1):
+            mask = 1 << bit
+            if is_lon:
+                mid = (lon_lo + lon_hi) / 2
+                if idx & mask:
