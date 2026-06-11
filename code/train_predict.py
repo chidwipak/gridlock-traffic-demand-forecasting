@@ -174,3 +174,11 @@ def main():
         geo_mean_va = smoothed_location_mean(
             train_geo.iloc[tr_idx], y[tr_idx], train_geo.iloc[va_idx],
             global_mean, TARGET_MEAN_SMOOTH)
+        geo_mean_te = smoothed_location_mean(
+            train_geo.iloc[tr_idx], y[tr_idx], test_geo,
+            global_mean, TARGET_MEAN_SMOOTH)
+
+        X_tr = train.iloc[tr_idx][BASE_FEATURES].copy()
+        X_tr["geo_mean"] = geo_mean_tr
+        X_va = train.iloc[va_idx][BASE_FEATURES].copy()
+        X_va["geo_mean"] = geo_mean_va
