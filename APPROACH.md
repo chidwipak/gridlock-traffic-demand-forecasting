@@ -73,3 +73,18 @@ To make the result stable and reproducible:
   across all folds.
 - Inside each fold we train with **4 different random seeds and average them**, so
   the prediction does not depend on luck from any single run.
+- Every random seed is fixed and LightGBM is run in deterministic mode, so the
+  pipeline produces the **exact same `submission.csv` every time**.
+- Finally we clip predictions to the valid `[0, 1]` range.
+
+## How well it does
+
+The cross‑validation score is written to `cv_report.txt` when you run the code. It
+reflects honest out‑of‑fold performance, i.e. the model is always scored on data
+it did not train on.
+
+## Tools we used
+
+- Python 3
+- pandas and numpy for data handling
+- scikit‑learn for cross‑validation
