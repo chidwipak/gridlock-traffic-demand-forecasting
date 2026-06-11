@@ -28,3 +28,13 @@ Cross-validation (5-fold, out-of-fold):
 
 The generated `submission.csv` has md5 `5d34532d66929d218be1d3f8b57fcd8c` and is
 reproduced byte-for-byte on every run (verified across two independent runs).
+
+## How to reproduce
+
+```bash
+cd code
+pip install -r requirements.txt
+python train_predict.py
+```
+
+The script is fully deterministic (all seeds fixed, LightGBM run in deterministic
