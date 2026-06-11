@@ -198,3 +198,11 @@ def main():
             fold_va += model.predict(X_va, num_iteration=model.best_iteration_) / N_SEEDS
             test_pred += model.predict(X_te, num_iteration=model.best_iteration_) / (N_SEEDS * N_FOLDS)
 
+        oof[va_idx] = fold_va
+        rmse = np.sqrt(np.mean((y[va_idx] - fold_va) ** 2))
+        print(f"fold {fold}: rmse={rmse:.6f}")
+
+    # Clip to the valid demand range [0, 1]
+    oof = np.clip(oof, 0.0, 1.0)
+    test_pred = np.clip(test_pred, 0.0, 1.0)
+
