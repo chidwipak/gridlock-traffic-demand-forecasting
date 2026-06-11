@@ -86,3 +86,11 @@ def add_base_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # Spatial coordinates from geohash
     coords = df["geohash"].map(decode_geohash)
+    df["lat"] = coords.map(lambda c: c[0])
+    df["lon"] = coords.map(lambda c: c[1])
+
+    # Categorical -> integer codes (LightGBM native categorical handling)
+    for col, mapping in [
+        ("RoadType", {"Residential": 0, "Street": 1, "Highway": 2}),
+        ("LargeVehicles", {"Not Allowed": 0, "Allowed": 1}),
+        ("Landmarks", {"No": 0, "Yes": 1}),
