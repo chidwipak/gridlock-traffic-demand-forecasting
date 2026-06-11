@@ -38,3 +38,9 @@ python train_predict.py
 ```
 
 The script is fully deterministic (all seeds fixed, LightGBM run in deterministic
+mode). Running it again regenerates a byte-identical `submission.csv`. The script
+prints the md5 hash of the output so you can confirm reproducibility.
+
+## Tools
+
+Python 3, pandas, numpy, scikit-learn, LightGBM.
