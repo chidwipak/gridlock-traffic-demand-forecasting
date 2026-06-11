@@ -70,3 +70,11 @@ def decode_geohash(gh: str):
 # ----------------------------------------------------------------------------
 # Feature engineering
 # ----------------------------------------------------------------------------
+def parse_minutes(ts: str) -> int:
+    h, m = ts.split(":")
+    return int(h) * 60 + int(m)
+
+
+def add_base_features(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    # Time of day in minutes and cyclical encodings (traffic is periodic)
