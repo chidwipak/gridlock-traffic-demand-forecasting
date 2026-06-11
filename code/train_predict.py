@@ -182,3 +182,11 @@ def main():
         X_tr["geo_mean"] = geo_mean_tr
         X_va = train.iloc[va_idx][BASE_FEATURES].copy()
         X_va["geo_mean"] = geo_mean_va
+        X_te = test[BASE_FEATURES].copy()
+        X_te["geo_mean"] = geo_mean_te
+
+        fold_va = np.zeros(len(va_idx))
+        for s in range(N_SEEDS):
+            model = lgb.LGBMRegressor(n_estimators=1500, **lgb_params(SEED + 100 * s))
+            model.fit(
+                X_tr, y[tr_idx],
