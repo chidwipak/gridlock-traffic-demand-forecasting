@@ -38,3 +38,11 @@ np.random.seed(SEED)
 # ----------------------------------------------------------------------------
 # Geohash decoding (base-32) -> approximate latitude / longitude
 # ----------------------------------------------------------------------------
+_BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz"
+_DECODE = {c: i for i, c in enumerate(_BASE32)}
+
+
+def decode_geohash(gh: str):
+    """Decode a geohash string into (lat, lon) center coordinates."""
+    lat_lo, lat_hi = -90.0, 90.0
+    lon_lo, lon_hi = -180.0, 180.0
