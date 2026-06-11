@@ -206,3 +206,11 @@ def main():
     oof = np.clip(oof, 0.0, 1.0)
     test_pred = np.clip(test_pred, 0.0, 1.0)
 
+    oof_rmse = np.sqrt(np.mean((y - oof) ** 2))
+    ss_res = np.sum((y - oof) ** 2)
+    ss_tot = np.sum((y - y.mean()) ** 2)
+    oof_r2 = 1 - ss_res / ss_tot
+    print(f"\nOOF RMSE = {oof_rmse:.6f}")
+    print(f"OOF R2   = {oof_r2:.6f}")
+
+    sub = pd.DataFrame({"Index": test["Index"].to_numpy(), "demand": test_pred})
