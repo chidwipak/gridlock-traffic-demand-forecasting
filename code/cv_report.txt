@@ -1,0 +1,4 @@
+OOF RMSE = 0.032916
+OOF R2   = 0.946410
+test mean = 0.118970
+test std  = 0.161667
