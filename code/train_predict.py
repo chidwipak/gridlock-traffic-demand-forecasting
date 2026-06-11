@@ -190,3 +190,11 @@ def main():
             model = lgb.LGBMRegressor(n_estimators=1500, **lgb_params(SEED + 100 * s))
             model.fit(
                 X_tr, y[tr_idx],
+                eval_set=[(X_va, y[va_idx])],
+                eval_metric="rmse",
+                categorical_feature=CATEGORICAL,
+                callbacks=[lgb.early_stopping(100, verbose=False), lgb.log_evaluation(0)],
+            )
+            fold_va += model.predict(X_va, num_iteration=model.best_iteration_) / N_SEEDS
+            test_pred += model.predict(X_te, num_iteration=model.best_iteration_) / (N_SEEDS * N_FOLDS)
+
