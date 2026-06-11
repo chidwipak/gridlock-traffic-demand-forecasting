@@ -222,3 +222,11 @@ def main():
         f.write(f"OOF R2   = {oof_r2:.6f}\n")
         f.write(f"test mean = {test_pred.mean():.6f}\n")
         f.write(f"test std  = {test_pred.std():.6f}\n")
+
+    md5 = hashlib.md5(open(out_path, "rb").read()).hexdigest()
+    print(f"wrote {out_path}")
+    print(f"submission.csv md5 = {md5}")
+    print(f"test pred mean={test_pred.mean():.6f} std={test_pred.std():.6f}")
+
+
+if __name__ == "__main__":
