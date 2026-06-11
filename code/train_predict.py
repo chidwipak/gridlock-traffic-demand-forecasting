@@ -150,3 +150,11 @@ def main():
     test = pd.read_csv(os.path.join(DATA_DIR, "test.csv"))
 
     train = add_base_features(train)
+    test = add_base_features(test)
+
+    global_mean = float(train["demand"].mean())
+    y = train["demand"].to_numpy()
+
+    # Location key = geohash (the dominant signal, corr ~0.83 with demand)
+    train_geo = train["geohash"]
+    test_geo = test["geohash"]
