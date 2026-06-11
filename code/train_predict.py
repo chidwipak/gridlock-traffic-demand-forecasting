@@ -30,3 +30,11 @@ DATA_DIR = os.path.join(HERE, "data")
 SEED = 42
 N_FOLDS = 5
 N_SEEDS = 2               # average several LightGBM seeds for a stable result
+TARGET_MEAN_SMOOTH = 20.0  # smoothing strength for location mean-encoding
+
+np.random.seed(SEED)
+
+
+# ----------------------------------------------------------------------------
+# Geohash decoding (base-32) -> approximate latitude / longitude
+# ----------------------------------------------------------------------------
