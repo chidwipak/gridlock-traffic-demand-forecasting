@@ -214,3 +214,11 @@ def main():
     print(f"OOF R2   = {oof_r2:.6f}")
 
     sub = pd.DataFrame({"Index": test["Index"].to_numpy(), "demand": test_pred})
+    out_path = os.path.join(HERE, "submission.csv")
+    sub.to_csv(out_path, index=False)
+
+    with open(os.path.join(HERE, "cv_report.txt"), "w") as f:
+        f.write(f"OOF RMSE = {oof_rmse:.6f}\n")
+        f.write(f"OOF R2   = {oof_r2:.6f}\n")
+        f.write(f"test mean = {test_pred.mean():.6f}\n")
+        f.write(f"test std  = {test_pred.std():.6f}\n")
